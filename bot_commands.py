@@ -52,7 +52,7 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
 # Отрисовка кнопок
 async def start_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     log(update, context)
-    await update.message.reply_text("Выберите город:", reply_markup=keyboard_menu)
+    await update.message.reply_text("Выберите город из списка\nИли напишите: /weather 'город' (на английском)", reply_markup=keyboard_menu)
 
 #-------------------------------------------------------------------------------------
 
