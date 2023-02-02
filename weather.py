@@ -85,17 +85,17 @@ def get_answer(city):
     # Записываем входящие данные в переменную
     weather = get_weather_by_city(f"{city}")
     # Разбиваем на переменные
+    main = weather['weather'][0]['main']
     temp = weather['main']['temp']
     windSpeed = weather['wind']['speed']
-    cloudiness = weather['weather'][0]['main']
-    # Формируем итоговую строку
-    answer = f'Temp = {temp}\nWind speed = {windSpeed}\nCloudiness = {cloudiness}'
-    return answer
+    pressure = weather['main']['pressure']
+    return (main, temp, windSpeed, pressure)
 #-------------------------------------------------------------------------------------
 # Проверка работоспособности методов
 #-------------------------------------------------------------------------------------
 # print(f'{is_in_list("Tomsk")} - {get_id("Tomsk")}')
 # print(get_weather_by_city("Tomsk"))
+# print(get_weather_by_city("vladivostok"))
 # # print(get_weather_by_id("1489425"))
 # print()
 # print(f'Vladivostok - {get_id("Vladivostok")}')
@@ -108,3 +108,4 @@ def get_answer(city):
 # print(f'Cloudiness = {cloudiness}')
 # print(get_weather_by_id("2013348"))
 # get_list_by_country("RU")
+# print(get_answer('Vladivostok'))

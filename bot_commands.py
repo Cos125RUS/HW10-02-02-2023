@@ -5,9 +5,11 @@ from telegram.ext import ContextTypes
 # Модуль логирования
 from spy import *
 
-# Модуль работы с данными
+# Модуль запроса данных о погоде
 from weather import *
 
+# Модуль обработки данных
+from answer import *
 
 
 #-------------------------------------------------------------------------------------
@@ -36,7 +38,7 @@ async def hello_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     # <class 'telegram._update.Update'>
     log(update, context)
     # user_id = update.effective_user.id 
-    await update.message.reply_text(f'Hello {update.effective_user.first_name}')
+    await update.message.reply_text(f'Привет {update.effective_user.first_name}')
 
 #-------------------------------------------------------------------------------------
 
@@ -44,7 +46,7 @@ async def hello_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
 # Подсказка для пользователей
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     log(update, context)
-    await update.message.reply_text(f'/weather <<City>>\nFor example:\n/weather Moscow')
+    await update.message.reply_text(f'Напиши /weather <<Твой город>> (на английском)\nНапример:\n/weather Moscow')
 
 #-------------------------------------------------------------------------------------
 
@@ -60,8 +62,9 @@ async def start_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
 # Считывание нажатий
 async def button(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     query = update.callback_query
-    answer = get_answer(query.data)
-    await query.answer()
+    weather_data = get_answer(query.data)
+    answer = create_answer(weather_data)
+    # await query.answer()
     await query.edit_message_text(text=answer, reply_markup=keyboard_menu) # Ответ пользователю
 
 #-------------------------------------------------------------------------------------
@@ -70,8 +73,10 @@ async def button(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 # Ответ на команду /weather
 async def weather_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     log(update, context)
-    cityName = update.message.text.replace('/weather ','')
-    await update.message.reply_text(get_answer(cityName))
+    city = update.message.text.replace('/weather ','')
+    weather_data = get_answer(city)
+    answer = create_answer(weather_data)
+    await update.message.reply_text(answer)
 
 #-------------------------------------------------------------------------------------
 
