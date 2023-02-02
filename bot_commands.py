@@ -9,6 +9,24 @@ from spy import *
 from weather import *
 
 
+
+#-------------------------------------------------------------------------------------
+# Хранение меню
+keyboard = [[InlineKeyboardButton("Томск", callback_data="Tomsk"),
+        InlineKeyboardButton("Владивосток", callback_data="Vladivostok"), 
+        InlineKeyboardButton("Новокузнецк", callback_data="Novokuznetsk")],  
+        [InlineKeyboardButton("Гродно", callback_data="Grodno"), 
+        InlineKeyboardButton("Вунгтау", callback_data="Vung Tau"),
+        InlineKeyboardButton("Шымкент", callback_data="Shymkent")],
+        [InlineKeyboardButton("Мурманск", callback_data="Красногорск"), 
+        InlineKeyboardButton("Уфа", callback_data="Ставрополь"),
+        InlineKeyboardButton("Барнаул", callback_data="Barnaul")], 
+        [InlineKeyboardButton("Москва", callback_data="Moscow"), 
+        InlineKeyboardButton("Санкт-Петербург", callback_data="St. Petersburg"),
+        InlineKeyboardButton("Казань", callback_data="Kazan")]]
+keyboard_menu = InlineKeyboardMarkup(keyboard)
+#-------------------------------------------------------------------------------------
+
 #-------------------------------------------------------------------------------------
 # Привтствие юзера
 async def hello_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -34,20 +52,7 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
 # Отрисовка кнопок
 async def start_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     log(update, context)
-    keyboard = [[InlineKeyboardButton("Томск", callback_data="Tomsk"),
-        InlineKeyboardButton("Владивосток", callback_data="Vladivostok"), 
-        InlineKeyboardButton("Новокузнецк", callback_data="Novokuznetsk")],  
-        [InlineKeyboardButton("Гродно", callback_data="Grodno"), 
-        InlineKeyboardButton("Вунгтау", callback_data="Vung Tau"),
-        InlineKeyboardButton("Шымкент", callback_data="Shymkent")],
-        [InlineKeyboardButton("Мурманск", callback_data="Красногорск"), 
-        InlineKeyboardButton("Уфа", callback_data="Ставрополь"),
-        InlineKeyboardButton("Барнаул", callback_data="Barnaul")], 
-        [InlineKeyboardButton("Москва", callback_data="Moscow"), 
-        InlineKeyboardButton("Санкт-Петербург", callback_data="St. Petersburg"),
-        InlineKeyboardButton("Казань", callback_data="Kazan")]]
-    reply_markup = InlineKeyboardMarkup(keyboard)
-    await update.message.reply_text("Выберите город:", reply_markup=reply_markup)
+    await update.message.reply_text("Выберите город:", reply_markup=keyboard_menu)
 
 #-------------------------------------------------------------------------------------
 
@@ -57,7 +62,7 @@ async def button(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     query = update.callback_query
     answer = get_answer(query.data)
     await query.answer()
-    await query.edit_message_text(text=answer) # Ответ пользователю
+    await query.edit_message_text(text=answer, reply_markup=keyboard_menu) # Ответ пользователю
 
 #-------------------------------------------------------------------------------------
 
