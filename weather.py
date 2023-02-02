@@ -93,7 +93,7 @@ def get_answer(city):
 #-------------------------------------------------------------------------------------
 # Проверка работоспособности методов
 #-------------------------------------------------------------------------------------
-# print(f'{is_in_list("Tomsk")} - {get_id("Tomsk")}')
+# print(f'{is_in_list("Grodno")} - {get_id("Grodno")}')
 # print(get_weather_by_city("Tomsk"))
 # print(get_weather_by_city("vladivostok"))
 # # print(get_weather_by_id("1489425"))

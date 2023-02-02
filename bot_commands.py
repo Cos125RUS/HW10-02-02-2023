@@ -11,17 +11,16 @@ from weather import *
 # Модуль обработки данных
 from answer import *
 
-
 #-------------------------------------------------------------------------------------
 # Хранение меню
 keyboard = [[InlineKeyboardButton("Томск", callback_data="Tomsk"),
         InlineKeyboardButton("Владивосток", callback_data="Vladivostok"), 
         InlineKeyboardButton("Новокузнецк", callback_data="Novokuznetsk")],  
-        [InlineKeyboardButton("Гродно", callback_data="Grodno"), 
+        [InlineKeyboardButton("Гродно", callback_data="Grodno Oblast"), 
         InlineKeyboardButton("Вунгтау", callback_data="Vung Tau"),
         InlineKeyboardButton("Шымкент", callback_data="Shymkent")],
-        [InlineKeyboardButton("Мурманск", callback_data="Красногорск"), 
-        InlineKeyboardButton("Уфа", callback_data="Ставрополь"),
+        [InlineKeyboardButton("Мурманск", callback_data="Murmansk"), 
+        InlineKeyboardButton("Уфа", callback_data="Ufa"),
         InlineKeyboardButton("Барнаул", callback_data="Barnaul")], 
         [InlineKeyboardButton("Москва", callback_data="Moscow"), 
         InlineKeyboardButton("Санкт-Петербург", callback_data="St. Petersburg"),
@@ -39,7 +38,6 @@ async def hello_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     log(update, context)
     # user_id = update.effective_user.id 
     await update.message.reply_text(f'Привет {update.effective_user.first_name}')
-
 #-------------------------------------------------------------------------------------
 
 #-------------------------------------------------------------------------------------
@@ -47,7 +45,6 @@ async def hello_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     log(update, context)
     await update.message.reply_text(f'Напиши /weather <<Твой город>> (на английском)\nНапример:\n/weather Moscow')
-
 #-------------------------------------------------------------------------------------
 
 #-------------------------------------------------------------------------------------
@@ -55,7 +52,6 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
 async def start_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     log(update, context)
     await update.message.reply_text("Выберите город из списка\nИли напишите: /weather 'город' (на английском)", reply_markup=keyboard_menu)
-
 #-------------------------------------------------------------------------------------
 
 #-------------------------------------------------------------------------------------
@@ -66,7 +62,6 @@ async def button(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     answer = create_answer(weather_data)
     # await query.answer()
     await query.edit_message_text(text=answer, reply_markup=keyboard_menu) # Ответ пользователю
-
 #-------------------------------------------------------------------------------------
 
 #-------------------------------------------------------------------------------------
@@ -77,7 +72,6 @@ async def weather_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     weather_data = get_answer(city)
     answer = create_answer(weather_data)
     await update.message.reply_text(answer)
-
 #-------------------------------------------------------------------------------------
 
 #-------------------------------------------------------------------------------------
