@@ -82,12 +82,17 @@ def get_weather_by_id(city_id):
 #-------------------------------------------------------------------------------------
 # Проверка работоспособности методов
 #-------------------------------------------------------------------------------------
-# print(is_in_list("Tomsk"))
-# print(get_id("Tomsk"))
+# print(f'{is_in_list("Tomsk")} - {get_id("Tomsk")}')
 # print(get_weather_by_city("Tomsk"))
-# print(get_weather_by_id("1489425"))
-# print(is_in_list("Vladivostok"))
-# print(get_id("Vladivostok"))
-# print(get_weather_by_city("Vladivostok"))
+# # print(get_weather_by_id("1489425"))
+# print()
+# print(f'Vladivostok - {get_id("Vladivostok")}')
+# weather = get_weather_by_city("Vladivostok")
+# temp = weather['main']['temp']
+# windSpeed = weather['wind']['speed']
+# cloudiness = weather['weather'][0]['main']
+# print(f'Temp = {temp}')
+# print(f'Wind speed = {windSpeed}')
+# print(f'Cloudiness = {cloudiness}')
 # print(get_weather_by_id("2013348"))
 # get_list_by_country("RU")
